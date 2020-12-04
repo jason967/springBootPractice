@@ -22,12 +22,12 @@ public class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Test
-    public void hello() throws Exception {
-        mockMvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
-    }
+//    @Test
+//    public void hello() throws Exception {
+//        mockMvc.perform(get("/hello"))
+//                .andExpect(status().isOk())
+//                .andExpect(content().string("hello"));
+//    }
     @Test
     public void createUser_JSON() throws Exception {
         String userJson="{\"username\":\"jaewoong\", \"password\":\"1234\"}";
