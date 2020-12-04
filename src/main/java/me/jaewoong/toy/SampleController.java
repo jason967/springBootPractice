@@ -1,16 +1,25 @@
 package me.jaewoong.toy;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+@RestController
 public class SampleController {
 
     @GetMapping("/hello")
-    public String hello(Model model)
+    public EntityModel<Hello> hello()
     {
-        model.addAttribute("name","choi");
-        return "hello";
+        Hello hello = new Hello();
+        hello.setPrefix("Hey");
+        hello.setName("CHoi");
+
+        EntityModel<Hello> helloResource = new EntityModel<>(hello);
+        helloResource.add(linkTo(methodOn(SampleController.class).hello()).withSelfRel());
+
+        return helloResource;
     }
 }
